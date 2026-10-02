@@ -1,0 +1,88 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         String    @default("CUSTOMER")
+  phone        String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  orders       Order[]
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  image       String
+  description String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+}
+
+model Product {
+  id            String      @id @default(cuid())
+  title         String
+  slug          String      @unique
+  description   String
+  price         Int
+  discountPrice Int?
+  stock         Int         @default(15)
+  rating        Float       @default(4.9)
+  reviewCount   Int         @default(18)
+  isFeatured    Boolean     @default(false)
+  isTrending    Boolean     @default(false)
+  colors        String
+  sizes         String
+  images        String
+  details       String?
+  categoryId    String
+  category      Category    @relation(fields: [categoryId], references: [id])
+  orderItems    OrderItem[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  orderNumber     String      @unique
+  userId          String?
+  user            User?       @relation(fields: [userId], references: [id])
+  customerName    String
+  customerPhone   String
+  customerAddress String
+  postalCode      String?
+  status          String      @default("PROCESSING")
+  subtotal        Int
+  discount        Int         @default(0)
+  shippingFee     Int         @default(0)
+  totalAmount     Int
+  paymentMethod   String      @default("درگاه پرداخت شاپرک")
+  paymentStatus   String      @default("PAID")
+  trackingCode    String?
+  items           OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model OrderItem {
+  id            String   @id @default(cuid())
+  orderId       String
+  order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId     String
+  product       Product  @relation(fields: [productId], references: [id])
+  selectedSize  String
+  selectedColor String
+  quantity      Int
+  unitPrice     Int
+  totalPrice    Int
+}
