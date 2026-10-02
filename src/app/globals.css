@@ -1,8 +1,44 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Doran';
+  src: url('/fonts/doran/Doran-Regular.woff2') format('woff2'),
+       url('/fonts/doran/Doran-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Doran';
+  src: url('/fonts/doran/Doran-Medium.woff2') format('woff2'),
+       url('/fonts/doran/Doran-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Doran';
+  src: url('/fonts/doran/Doran-Bold.woff2') format('woff2'),
+       url('/fonts/doran/Doran-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Doran';
+  src: url('/fonts/doran/Doran-ExtraBold.woff2') format('woff2'),
+       url('/fonts/doran/Doran-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  --font-sans: var(--font-doran), system-ui, sans-serif;
-  --font-serif: var(--font-doran), Georgia, serif;
+  --font-sans: 'Doran', var(--font-doran), system-ui, sans-serif;
+  --font-serif: 'Doran', var(--font-doran), Georgia, serif;
 }
 
 :root {
@@ -14,10 +50,20 @@
   --accent-gold: #b89b72;
 }
 
+*,
+body,
+button,
+input,
+select,
+textarea,
+h1, h2, h3, h4, h5, h6,
+p, span, a, div {
+  font-family: 'Doran', var(--font-doran), system-ui, -apple-system, sans-serif !important;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-doran), system-ui, sans-serif;
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
 }

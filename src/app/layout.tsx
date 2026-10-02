@@ -62,7 +62,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fa" dir="rtl" className={`${doran.variable} font-sans antialiased`}>
-      <body className="min-h-screen flex flex-col bg-stone-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 selection:bg-amber-200 selection:text-zinc-900">
+      <body className={`${doran.className} min-h-screen flex flex-col bg-stone-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 selection:bg-amber-200 selection:text-zinc-900`}>
         <AuthProvider>
           <CartProvider>
             <Header />
